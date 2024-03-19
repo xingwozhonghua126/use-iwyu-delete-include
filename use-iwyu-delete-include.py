@@ -31,7 +31,7 @@ def remove_unused_lines(input_file, output_file):
 
     with open(output_file, 'w') as file:
         i = 0
-        while i < len(lines):
+        while i + 1 < len(lines):
             if ("remove these lines:" in lines[i] and lines[i + 1].strip() == "") or (
                     lines[i].strip() == "" and lines[i + 1].strip() == ""):
                 i += 2
@@ -78,7 +78,7 @@ def remove_lines(file_path):
         if line.startswith("- "):
             backup_file(file_name)
             delete_line(file_name,int(line.strip().split('// lines ')[-1].split('-')[-1]))
-            build_path = "/home/csj/桌面/wesnoth/build"
+            build_path = os.path.dirname(file_path)
             runcode = run_make(build_path)
             if runcode:
                 backup_file(file_name)
@@ -128,10 +128,16 @@ def run_make(directory):
         return False
 
 def main():
-    remove_include_paragraphs_from_input_file("/home/csj/桌面/wesnoth/build/iwyu.log", "/home/csj/桌面/wesnoth/build/iwyu_temp_1.log")
-    remove_unused_lines("/home/csj/桌面/wesnoth/build/iwyu_temp_1.log","/home/csj/桌面/wesnoth/build/iwyu_temp_2.log")
-    sort_lines_descending("/home/csj/桌面/wesnoth/build/iwyu_temp_2.log","/home/csj/桌面/wesnoth/build/iwyu_temp_3.log")
-    remove_lines("/home/csj/桌面/wesnoth/build/iwyu_temp_3.log")
+    folder_path = "/home/csj/桌面/wesnoth"
+    input_file = f"{folder_path}/build/iwyu.log"
+    temp_file_1 = f"{folder_path}/build/iwyu_temp_1.log"
+    temp_file_2 = f"{folder_path}/build/iwyu_temp_2.log"
+    temp_file_3 = f"{folder_path}/build/iwyu_temp_3.log"
+
+    remove_include_paragraphs_from_input_file(input_file, temp_file_1)
+    remove_unused_lines(temp_file_1, temp_file_2)
+    sort_lines_descending(temp_file_2, temp_file_3)
+    remove_lines(temp_file_3)
 
 
 if __name__ == "__main__":
