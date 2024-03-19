@@ -1,6 +1,6 @@
-# Script: use-iwyu-delete-include
+# Script: use-iwyu-delete-lines
 
-This script is designed to remove specific lines from code files and test the build process to ensure that the code still builds successfully after the removal.
+This script attempts to delete potentially unnecessary lines by reading iwyu.log, and if the build still succeeds after deletion, it confirms the deletion was successful.
 
 ## Features:
 
