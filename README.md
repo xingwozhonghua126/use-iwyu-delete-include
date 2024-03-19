@@ -27,3 +27,7 @@ This script requires Python 3.x and the tqdm package to be installed.
 Use caution when removing lines from code files, as it may impact the functionality of the code.
 Always backup files and verify the build process after making changes.
 Disclaimer: Use this script at your own risk. The author is not responsible for any code or system failures resulting from the use of this script.
+
+## 中文说明
+
+[点击查看中文说明](README_CN.md)
