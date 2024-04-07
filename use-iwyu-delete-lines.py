@@ -31,13 +31,15 @@ def remove_unused_lines(input_file, output_file):
 
     with open(output_file, 'w') as file:
         i = 0
-        while i + 1 < len(lines):
-            if ("remove these lines:" in lines[i] and lines[i + 1].strip() == "") or (
-                    lines[i].strip() == "" and lines[i + 1].strip() == ""):
-                i += 2
-            else:
-                file.write(lines[i])
-                i += 1
+        while i < len(lines):
+            if i + 1 < len(lines):
+                if ("remove these lines:" in lines[i] and lines[i + 1].strip() == "") or (
+                        lines[i].strip() == "" and lines[i + 1].strip() == ""):
+                    i += 2
+                    continue
+                    
+            file.write(lines[i])
+            i += 1
 
 
 def sort_lines_descending(input_file, output_file):
